@@ -95,10 +95,7 @@ export const Web3Provider: FC<Web3ContextProps> = ({ children }) => {
     };
 
     const connect = async () => {
-        if (!ethereum) {
-            toast.warn("Metamask not found. Please install it");
-            return;
-        }
+        if (!ethereum) throw new Error("Metamask not found. Please install it");
 
         try {
             const provider = new ethers.BrowserProvider(ethereum);
