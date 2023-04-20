@@ -1,6 +1,5 @@
 import { FC, createContext, ReactNode, useState, useEffect } from "react";
 import { JsonRpcApiProvider, ethers } from "ethers";
-import { toast } from "react-toastify";
 
 import { metaMaskError } from "../constants";
 import { CampaignForm, Campaign, Donation } from "../types";
