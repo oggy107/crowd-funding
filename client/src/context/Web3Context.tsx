@@ -86,7 +86,7 @@ export const Web3Provider: FC<Web3ContextProps> = ({ children }) => {
             const signer = await provider.getSigner();
 
             return new ethers.Contract(
-                "0x3aB7c8e1685B5A2B1a4e74A175c2f467c246a456",
+                "0xdDd1fe94f72e221A4BFd7700d5a6dD05De24912E",
                 CrowdFunding.abi,
                 signer
             );
