@@ -11,10 +11,12 @@ import { toast } from "react-toastify";
 const NavBarButton = () => {
     const navigate = useNavigate();
     const web3 = useContext(web3Context);
+    const { setActive } = useContext(navContext);
 
     const handleClick = () => {
         if (web3.provider) {
             navigate("/create-campaign");
+            setActive!(NavLinkNames.CAMPAIGN);
         } else {
             if (web3.connect) {
                 web3.connect()
