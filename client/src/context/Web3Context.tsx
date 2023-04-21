@@ -48,7 +48,7 @@ export const Web3Provider: FC<Web3ContextProps> = ({ children }) => {
             };
 
             ethereum.on("accountsChanged", accountWasChanged);
-            ethereum.on("networkChanged", () => {
+            ethereum.on("chainChanged", () => {
                 window.location.reload();
             });
         }
