@@ -48,6 +48,9 @@ export const Web3Provider: FC<Web3ContextProps> = ({ children }) => {
             };
 
             ethereum.on("accountsChanged", accountWasChanged);
+            ethereum.on("networkChanged", () => {
+                window.location.reload();
+            });
         }
     }, []);
 
@@ -85,8 +88,15 @@ export const Web3Provider: FC<Web3ContextProps> = ({ children }) => {
         if (provider) {
             const signer = await provider.getSigner();
 
+            const GOERLI = "0xdDd1fe94f72e221A4BFd7700d5a6dD05De24912E";
+            const SEPOLIA = "0xa14e3A60d284C705F77F45617beADD55C3C61e23";
+
+            const network = (await provider.getNetwork()).name;
+
+            const contractAddress = network === "goerli" ? GOERLI : SEPOLIA;
+
             return new ethers.Contract(
-                "0xdDd1fe94f72e221A4BFd7700d5a6dD05De24912E",
+                contractAddress,
                 CrowdFunding.abi,
                 signer
             );
@@ -144,7 +154,11 @@ export const Web3Provider: FC<Web3ContextProps> = ({ children }) => {
                     } as Campaign;
                 });
 
-                return [...parsedCampaigns];
+                if ([...parsedCampaigns][0]) {
+                    return [...parsedCampaigns];
+                } else {
+                    return [];
+                }
             } catch (error: any) {
                 handleError(error);
             }
