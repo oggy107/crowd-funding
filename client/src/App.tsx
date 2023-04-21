@@ -7,7 +7,15 @@ import { NavBar, SideBar } from "./components";
 const App = () => {
     return (
         <div className="relative sm:p-8 p-4 bg-[#13131a] min-h-screen flex flex-row">
-            <ToastContainer />
+            <ToastContainer
+                theme="dark"
+                position="top-center"
+                toastStyle={{
+                    fontFamily: "Epilogue",
+                    border: "1px solid #808191",
+                    borderRadius: "10px",
+                }}
+            />
             <div className="sm:flex hidden mr-10 relative">
                 <SideBar />
             </div>
