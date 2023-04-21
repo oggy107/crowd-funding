@@ -19,6 +19,10 @@ const config: HardhatUserConfig = {
             url: "https://goerli.blockpi.network/v1/rpc/public",
             accounts: [process.env.PRIVATE_KEY!],
         },
+        sepolia: {
+            url: "https://ethereum-sepolia.blockpi.network/v1/rpc/public",
+            accounts: [process.env.PRIVATE_KEY!],
+        },
     },
     gasReporter: {
         enabled: true,
