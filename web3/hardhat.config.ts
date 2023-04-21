@@ -9,11 +9,18 @@ dotenvConfig();
 const config: HardhatUserConfig = {
     solidity: "0.8.19",
     networks: {
+        local: {
+            url: "http://127.0.0.1:8545",
+        },
         ganache: {
             url: "http://127.0.0.1:7545",
         },
         goerli: {
             url: "https://goerli.blockpi.network/v1/rpc/public",
+            accounts: [process.env.PRIVATE_KEY!],
+        },
+        sepolia: {
+            url: "https://ethereum-sepolia.blockpi.network/v1/rpc/public",
             accounts: [process.env.PRIVATE_KEY!],
         },
     },

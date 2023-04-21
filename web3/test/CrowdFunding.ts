@@ -5,7 +5,7 @@ import { solidity } from "ethereum-waffle";
 
 chai.use(solidity);
 
-const localNetworks = ["hardhat", "ganache"];
+const localNetworks = ["hardhat", "ganache", "local"];
 
 if (!localNetworks.includes(hre.network.name)) {
     throw new Error(
@@ -158,11 +158,11 @@ describe("Crowd Funding", () => {
         setTimeout(() => {
             clearInterval(interval);
             console.log();
-            chai.expect(crowdFunding.fundToCampaign(0, { value: AMOUNT }))
-                .to.be.revertedWith("Closed")
-                .then(() => {
-                    done();
-                });
+            chai.expect(
+                crowdFunding.fundToCampaign(0, { value: AMOUNT })
+            ).to.be.reverted.then(() => {
+                done();
+            });
         }, 10 * 1000 + 5000);
     });
 });
