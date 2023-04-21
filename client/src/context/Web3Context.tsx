@@ -61,14 +61,15 @@ export const Web3Provider: FC<Web3ContextProps> = ({ children }) => {
             if (error.error.code === metaMaskError.resourceUnavailable.code) {
                 throw new Error(metaMaskError.resourceUnavailable.message);
             }
-        } else if (error.info.error) {
+        } else if (error.info) {
             if (
                 error.info.error.code === metaMaskError.userRejectedRequest.code
             ) {
                 throw new Error(metaMaskError.userRejectedRequest.message);
             }
         } else {
-            throw new Error("Something went wrong");
+            if (error.message) throw new Error(error.message);
+            else throw new Error("Something went wrong!");
         }
     };
 
@@ -88,12 +89,21 @@ export const Web3Provider: FC<Web3ContextProps> = ({ children }) => {
         if (provider) {
             const signer = await provider.getSigner();
 
+            const availableNetworks = ["goerli", "sepolia"];
+
             const GOERLI = "0xdDd1fe94f72e221A4BFd7700d5a6dD05De24912E";
             const SEPOLIA = "0xa14e3A60d284C705F77F45617beADD55C3C61e23";
 
-            const network = (await provider.getNetwork()).name;
+            const currentNetwork = (await provider.getNetwork()).name;
 
-            const contractAddress = network === "goerli" ? GOERLI : SEPOLIA;
+            if (!availableNetworks.includes(currentNetwork)) {
+                throw new Error(
+                    "Contract is only available on Goerli and Sepolia network. Please switch network to goerli or sepolia"
+                );
+            }
+
+            const contractAddress =
+                currentNetwork === "goerli" ? GOERLI : SEPOLIA;
 
             return new ethers.Contract(
                 contractAddress,
