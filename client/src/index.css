@@ -16,3 +16,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
     filter: invert(0.8);
 }
+
+@media only screen and (max-width: 480px) {
+    .Toastify__toast {
+        margin: 20px;
+        margin-top: 65px;
+    }
+}

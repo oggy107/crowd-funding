@@ -1,14 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { web3Context } from "../context";
+import { web3Context, navContext } from "../context";
 import { Campaign } from "../types";
 import { Campaigns } from "../components";
 
 const Profile = () => {
     const web3 = useContext(web3Context);
+    const { search } = useContext(navContext);
+
     const [isLoading, setIsLoading] = useState(false);
     const [campaigns, setCampaigns] = useState<Array<Campaign>>([]);
+    const [allCampaigns, setAllCampaigns] = useState<Array<Campaign>>([]);
 
     const fetchCampaigns = async () => {
         setIsLoading(true);
@@ -16,9 +19,11 @@ const Profile = () => {
 
         web3.fetchCampaigns!()
             .then((campaigns: Array<Campaign>) => {
-                setCampaigns(
-                    campaigns.filter((campaign) => campaign.owner == address)
+                const filteredCampaigns = campaigns.filter(
+                    (campaign) => campaign.owner == address
                 );
+                setCampaigns(filteredCampaigns);
+                setAllCampaigns(filteredCampaigns);
                 setIsLoading(false);
             })
             .catch((error: Error) => {
@@ -28,6 +33,18 @@ const Profile = () => {
     };
 
     useEffect(() => {
+        if (search!) {
+            setCampaigns(
+                allCampaigns.filter((campaign) =>
+                    campaign.title.toLowerCase().includes(search!)
+                )
+            );
+        } else {
+            setCampaigns(allCampaigns);
+        }
+    }, [search]);
+
+    useEffect(() => {
         if (web3.provider) {
             fetchCampaigns();
         }
@@ -35,7 +52,6 @@ const Profile = () => {
 
     return (
         <div>
-            {isLoading && <div>Loading...</div>}
             <Campaigns
                 title="Your Campaigns"
                 isLoading={isLoading}
