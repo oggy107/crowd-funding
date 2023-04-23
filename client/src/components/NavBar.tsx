@@ -84,7 +84,12 @@ const NavBar = () => {
 
             {/* small screen navigation */}
             <div className="sm:hidden flex justify-between items-center relative">
-                <div className="w-[40px] h-[40px] flex justify-center items-center cursor-pointer bg-[#2c2f32] rounded-[10px]">
+                <div
+                    className="w-[40px] h-[40px] flex justify-center items-center cursor-pointer bg-[#2c2f32] rounded-[10px]"
+                    onClick={() => {
+                        navigate("/");
+                    }}
+                >
                     <img
                         src={logo}
                         alt="user"
