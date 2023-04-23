@@ -109,8 +109,8 @@ const CampaignDetails = () => {
                         <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">
                             Creator
                         </h4>
-                        <div className="mt-[20px] flex flex-row flew-wrap items-center gap-[14px]">
-                            <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full bg-[#2c2f32] cursor-pointer">
+                        <div className="mt-[20px] flex flex-row flew-wrap justify-cente items-center gap-[14px]">
+                            <div className="w-[52px] h-[52px] flex items-center justify-center flex-shrink-0 rounded-full bg-[#2c2f32] cursor-pointer">
                                 <img
                                     src={thirdweb}
                                     alt="user"
