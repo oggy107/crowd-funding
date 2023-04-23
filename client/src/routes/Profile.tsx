@@ -52,7 +52,6 @@ const Profile = () => {
 
     return (
         <div>
-            {isLoading && <div>Loading...</div>}
             <Campaigns
                 title="Your Campaigns"
                 isLoading={isLoading}
