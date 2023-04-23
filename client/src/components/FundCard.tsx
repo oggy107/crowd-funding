@@ -59,7 +59,7 @@ const FundCard = ({ campaign, handleClick }: FundCardProps) => {
                     </div>
                 </div>
                 <div className="flex items-center mt-[20px] gap-[12px]">
-                    <div className="w-[30px] h-[30px] bg-primary rounded-full flex justify-center items-center">
+                    <div className="w-[30px] h-[30px] bg-gray-950 rounded-full flex justify-center items-center">
                         <img
                             src={thirdweb}
                             alt="thirdweb"
