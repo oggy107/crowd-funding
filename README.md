@@ -29,3 +29,36 @@
 <br>
 
 ***Note*:** Currently only deployed on sepolia and goerli ethereum test networks
+
+---
+
+## Running Locally
+
+<br>
+
+* Clone the repository
+
+  ```
+  $ git clone https://github.com/oggy107/crowd-surge.git
+  ```
+
+* Install Dependencies
+
+  ```
+  $ cd crowd-surge
+  $ cd client
+  $ yarn
+  ```
+
+* Run the development server
+
+  ```
+  $ yarn dev
+  ```
+
+* If you need to develop smart contract install dependencies in `web3` subfolder
+
+    ```
+    $ cd web3
+    $ yarn
+    ```
