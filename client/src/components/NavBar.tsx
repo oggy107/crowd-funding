@@ -2,7 +2,7 @@ import { useState, useContext, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { CustomButton } from "./";
-import { logo, menu, thirdweb, search } from "../assets";
+import { logo, menu, thirdweb, search as searchLogo } from "../assets";
 import { navlinks } from "../constants";
 import { NavLinkNames } from "../types";
 import { web3Context, navContext } from "../context";
@@ -44,7 +44,7 @@ const NavBarButton = () => {
 
 const NavBar = () => {
     const navigate = useNavigate();
-    const { setActive, active } = useContext(navContext);
+    const { setActive, active, setSearch, search } = useContext(navContext);
     const [toggleDrawer, setToggleDrawser] = useState(false);
 
     // close drawer on scroll
@@ -67,10 +67,14 @@ const NavBar = () => {
                     type="text"
                     className="w-full font-epilogue font-normal text-[14px] bg-transparent outline-none text-white placeholder:text-placeholder"
                     placeholder="Search for campaigns"
+                    value={search}
+                    onChange={(e) => {
+                        setSearch!(e.target.value.toLowerCase());
+                    }}
                 />
                 <div className="w-[72px] h-full rounded-full bg-primary_2 flex justify-center items-center cursor-pointer ">
                     <img
-                        src={search}
+                        src={searchLogo}
                         alt="search-logo"
                         className="w-[15px] h-[15px] object-contain"
                     />
