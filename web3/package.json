@@ -1,7 +1,6 @@
 {
-  "name": "web3",
+  "name": "crowd-surge-contract",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",
