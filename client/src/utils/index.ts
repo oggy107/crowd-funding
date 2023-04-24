@@ -1,7 +1,13 @@
 export const daysLeft = (deadline: number) => {
     const now = Math.floor(new Date().getTime() / 1000);
 
-    return Math.floor((deadline - now) / (3600 * 24));
+    const dl = Math.floor((deadline - now) / (3600 * 24));
+
+    if (dl < 0) {
+        return "NIL";
+    }
+
+    return dl;
 };
 
 export const calculateBarPercentage = (

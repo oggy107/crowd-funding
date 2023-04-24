@@ -74,6 +74,39 @@ const CampaignDetails = () => {
         }
     };
 
+    const isCampaignEnded = () => {
+        if (daysLeft(campaign.deadline) == "NIL") {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    const getButtonTitle = () => {
+        if (isTargetReached()) {
+            return "Target Achieved";
+        } else if (isCampaignEnded()) {
+            return "Campaign Ended";
+        } else if (web3.provider) {
+            return "Fund Campaign";
+        } else {
+            return "Connect";
+        }
+    };
+
+    const handleClick = () => {
+        if (isTargetReached()) {
+            toast.warn(
+                "Campaign donation target has already been reached. Thank you :)"
+            );
+        } else if (isCampaignEnded()) {
+            toast.warn("Campaign has already ended");
+        } else {
+            if (web3.provider) handleDonate();
+            else connect();
+        }
+    };
+
     return (
         <div>
             {isLoading && <Loader />}
@@ -210,24 +243,9 @@ const CampaignDetails = () => {
 
                         <CustomButton
                             btnType="button"
-                            title={
-                                isTargetReached()
-                                    ? "Target Achieved"
-                                    : web3.provider
-                                    ? "Fund Campaign"
-                                    : "Connect"
-                            }
+                            title={getButtonTitle()}
                             styles="w-full bg-[#8c6dfd]"
-                            handleClick={() => {
-                                if (isTargetReached()) {
-                                    toast.warn(
-                                        "Campaign donation target has already been reached. Thank you :)"
-                                    );
-                                } else {
-                                    if (web3.provider) handleDonate();
-                                    else connect();
-                                }
-                            }}
+                            handleClick={handleClick}
                         />
                     </div>
                 </div>
