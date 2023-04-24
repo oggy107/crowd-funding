@@ -66,6 +66,14 @@ const CampaignDetails = () => {
         }
     };
 
+    const isTargetReached = () => {
+        if (campaign.amountCollected >= campaign.target) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     return (
         <div>
             {isLoading && <Loader />}
@@ -202,11 +210,23 @@ const CampaignDetails = () => {
 
                         <CustomButton
                             btnType="button"
-                            title={web3.provider ? "Fund Campaign" : "Connect"}
+                            title={
+                                isTargetReached()
+                                    ? "Target Achieved"
+                                    : web3.provider
+                                    ? "Fund Campaign"
+                                    : "Connect"
+                            }
                             styles="w-full bg-[#8c6dfd]"
                             handleClick={() => {
-                                if (web3.provider) handleDonate();
-                                else connect();
+                                if (isTargetReached()) {
+                                    toast.warn(
+                                        "Campaign donation target has already been reached. Thank you :)"
+                                    );
+                                } else {
+                                    if (web3.provider) handleDonate();
+                                    else connect();
+                                }
                             }}
                         />
                     </div>
